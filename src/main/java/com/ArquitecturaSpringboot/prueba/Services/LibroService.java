@@ -29,7 +29,7 @@ public class LibroService {
 
 
     public List<LibroDTO> searchLibroByAutor(String autor) {
-        return myRepo.findByautor(autor).stream().map(LibroService::getLibroDTO).toList();
+        return myRepo.findByAutor(autor).stream().map(LibroService::getLibroDTO).toList();
     }
 
     public List<LibroDTO> getLibrosMayoresDe(int x) {

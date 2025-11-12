@@ -5,6 +5,7 @@ import com.ArquitecturaSpringboot.prueba.Model.Entities.Libro;
 import com.ArquitecturaSpringboot.prueba.Services.LibroService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class LibroController {
     private final LibroService myService;
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Libro createLibro(@RequestBody LibroDTO libro)
     {
         return myService.createLibro(libro);
@@ -28,9 +30,9 @@ public class LibroController {
     }
 
     @GetMapping("/buscar")
-    public LibroDTO searchLibro(@RequestParam String autor)
+    public List<LibroDTO> searchLibro(@RequestParam String autor)
     {
-        return myService.searchLibro(autor);
+        return myService.searchLibroByAutor(autor);
     }
 
     @GetMapping("/mayores")

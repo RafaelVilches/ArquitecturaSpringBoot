@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 public interface LibroRepository extends JpaRepository<Libro,Long> {
-    public List<Libro> findByautor(String autor);
+    public List<Libro> findByAutor(String autor);
 
     @Query("SELECT l FROM Libro l WHERE l.paginas > :paginas")
     List<Libro> findLibrosConMasPaginasQue(@Param("paginas") int paginas);
