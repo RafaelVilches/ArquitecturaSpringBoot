@@ -5,6 +5,7 @@ import com.ArquitecturaSpringboot.prueba.Model.Entities.Libro;
 import com.ArquitecturaSpringboot.prueba.Repository.LibroRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,8 +16,12 @@ public class LibroService {
 
     private final LibroRepository myRepo;
 
-    public Libro createLibro(LibroDTO libro) {
-
+    public Libro createLibro(LibroDTO libro) throws IllegalArgumentException {
+        if (!StringUtils.hasText(libro.getTitulo()) ||
+                !StringUtils.hasText(libro.getAutor()) ||
+                libro.getPaginas()<= 0  ) {
+            throw new IllegalArgumentException("El título no puede ser nulo ni vacío");
+        }
         return myRepo.save(new Libro(null,libro.getTitulo(),libro.getAutor(),libro.getPaginas()));
     }
 
